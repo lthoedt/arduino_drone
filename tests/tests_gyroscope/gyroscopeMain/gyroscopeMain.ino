@@ -6,8 +6,11 @@
  */
 #include <MPU6050_tockn.h>
 #include <Wire.h>
+#include <Servo.h>
 
 MPU6050 mpu6050(Wire);
+
+Servo servo1;
 
 long timer = 0;
 
@@ -16,6 +19,8 @@ void setup() {
   Wire.begin();
   mpu6050.begin();
   mpu6050.calcGyroOffsets(true);
+
+  servo1.attach(9);
 }
 
 void loop() {
@@ -40,12 +45,18 @@ void loop() {
 //     Serial.print("	gyroAngleY : ");Serial.print(mpu6050.getGyroAngleY());
 //     Serial.print("	gyroAngleZ : ");Serial.println(mpu6050.getGyroAngleZ());
     
-//     Serial.print("angleX : ");Serial.print(mpu6050.getAngleX());
+    // Serial.print("angleX : ");Serial.println(mpu6050.getAngleX());
 //     Serial.print("	angleY : ");Serial.print(mpu6050.getAngleY());
 //     Serial.print("	angleZ : ");Serial.println(mpu6050.getAngleZ());
 //     Serial.println("=======================================================");
 //     timer = millis();
     
 //   }
+
+    // servo1.write( map( mpu6050.getAngleX(), -90, 90, 0, 180 ) );
+
+    servo1.write(0);
+
+
 
 } 
