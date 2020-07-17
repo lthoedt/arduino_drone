@@ -53,10 +53,9 @@ void loop() {
     
 //   }
 
-    // servo1.write( map( mpu6050.getAngleX(), -90, 90, 0, 180 ) );
+    float angle = mpu6050.getAngleX() + 90;
 
-    servo1.write(0);
-
+    servo1.write( angle );
 
 
 } 
