@@ -18,8 +18,9 @@ void loop() {
   val = IBus.readChannel(0); // get latest value for servo channel 1
   myservo.writeMicroseconds(val);   // sets the servo position
 
-  if (readChannel(6, 0, 2, 0) == 1) {
-    digitalWrite(4, HIGH); 
+  // if (readChannel(6, 0, 2, 0) == 1) {
+  if (readChannel(2, 0, 180, 0) > 170) {
+    digitalWrite(4, HIGH);
   } else {
     digitalWrite(4, LOW);
   }

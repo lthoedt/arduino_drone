@@ -53,9 +53,7 @@ void loop() {
     
 //   }
 
-    float angle = mpu6050.getAngleX() + 90;
-
-    servo1.write( angle );
+    Serial.println( mpu6050.getGyroAngleX() );
 
 
 } 
