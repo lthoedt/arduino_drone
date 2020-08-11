@@ -25,11 +25,14 @@ void motorsUpdate() {
 	motorsUpdateRoll();
 	motorsUpdateRotate();
 
+	gyroStabilise();
+}
+
+void motorsTurn() {
 	motor_TL.writeMicroseconds( motor_TL_rpm );
 	motor_TR.writeMicroseconds( motor_TR_rpm );
 	motor_BL.writeMicroseconds( motor_BL_rpm );
 	motor_BR.writeMicroseconds( motor_BR_rpm );
-
 }
 
 void motorsUpdateThrottle() {
@@ -40,24 +43,36 @@ void motorsUpdateThrottle() {
 }
 
 void motorsUpdatePitch() {
-	motor_TL_rpm -= readChannel( 1, -motor_manouvre_range, motor_manouvre_range, 0 );
-	motor_TR_rpm -= readChannel( 1, -motor_manouvre_range, motor_manouvre_range, 0 );
-	motor_BL_rpm += readChannel( 1, -motor_manouvre_range, motor_manouvre_range, 0 );
-	motor_BR_rpm += readChannel( 1, -motor_manouvre_range, motor_manouvre_range, 0 );
+	motorsX( readChannel( 1, -motor_manouvre_range, motor_manouvre_range, 0 ) );
 }
 
 void motorsUpdateRoll() {
-	motor_TL_rpm += readChannel( 0, -motor_manouvre_range, motor_manouvre_range, 0 );
-	motor_TR_rpm -= readChannel( 0, -motor_manouvre_range, motor_manouvre_range, 0 );
-	motor_BL_rpm += readChannel( 0, -motor_manouvre_range, motor_manouvre_range, 0 );
-	motor_BR_rpm -= readChannel( 0, -motor_manouvre_range, motor_manouvre_range, 0 );
+	motorsY( readChannel( 0, -motor_manouvre_range, motor_manouvre_range, 0 ) );
 }
 
 void motorsUpdateRotate() {
-	motor_TL_rpm -= readChannel( 3, -motor_manouvre_range, motor_manouvre_range, 0 );
-	motor_TR_rpm += readChannel( 3, -motor_manouvre_range, motor_manouvre_range, 0 );
-	motor_BL_rpm += readChannel( 3, -motor_manouvre_range, motor_manouvre_range, 0 );
-	motor_BR_rpm -= readChannel( 3, -motor_manouvre_range, motor_manouvre_range, 0 );
+	motorsZ( readChannel( 3, -motor_manouvre_range, motor_manouvre_range, 0 ) );
+}
+
+void motorsX( int speed ) {
+	motor_TL_rpm -= speed;
+	motor_TR_rpm -= speed;
+	motor_BL_rpm += speed;
+	motor_BR_rpm += speed;
+}
+
+void motorsY( int speed ) {
+	motor_TL_rpm += speed;
+	motor_TR_rpm -= speed;
+	motor_BL_rpm += speed;
+	motor_BR_rpm -= speed;
+}
+
+void motorsZ( int speed ) {
+	motor_TL_rpm -= speed;
+	motor_TR_rpm += speed;
+	motor_BL_rpm += speed;
+	motor_BR_rpm -= speed;
 }
 
 void motorsUpdateManouvreRange() {

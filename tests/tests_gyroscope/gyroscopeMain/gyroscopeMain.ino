@@ -8,7 +8,7 @@
 #include <Wire.h>
 #include <Servo.h>
 
-MPU6050 mpu6050(Wire);
+MPU6050 gyro(Wire);
 
 Servo servo1;
 
@@ -17,14 +17,14 @@ long timer = 0;
 void setup() {
   Serial.begin(9600);
   Wire.begin();
-  mpu6050.begin();
-  mpu6050.calcGyroOffsets(true);
+  gyro.begin();
+  gyro.calcGyroOffsets(true);
 
   servo1.attach(9);
 }
 
 void loop() {
-  mpu6050.update();
+  gyro.update();
 
 //   if(millis() - timer > 1000){
     
@@ -53,7 +53,7 @@ void loop() {
     
 //   }
 
-    Serial.println( mpu6050.getGyroAngleX() );
+    Serial.println( gyro.getGyroAngleZ() );
 
 
 } 

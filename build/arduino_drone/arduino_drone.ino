@@ -23,4 +23,6 @@ void loop() {
 	gyroUpdate();
 	motorsUpdate();
 
+	motorsTurn();
+
 }

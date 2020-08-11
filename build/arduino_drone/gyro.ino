@@ -1,13 +1,18 @@
-MPU6050 mpu6050(Wire);
+MPU6050 gyro(Wire);
+
+float gyroStabiliseThreshold = 1.0;
+float gyroStabiliseFactor = 1.0;
 
 void gyroInit() {
 	Wire.begin();
-	mpu6050.begin();
-	mpu6050.calcGyroOffsets(true);
+	gyro.begin();
+	gyro.calcGyroOffsets(true);
 }
 
 void gyroUpdate() {
-	mpu6050.update();
+	gyro.update();
+
+	gyroUpdateStabiliseFactor();
 
 	// Serial.print( "X: " );
 	// Serial.println( gyroGetAngleX() );
@@ -20,13 +25,58 @@ void gyroUpdate() {
 }
 
 float gyroGetAngleX() {
-	return mpu6050.getAngleX();
+	// forward is +
+	// backward is -
+	return gyro.getGyroAngleX();
 }
 
 float gyroGetAngleY() {
-	return mpu6050.getAngleY();
+	// right is +
+	// left is -
+	return gyro.getGyroAngleY();
 }
 
 float gyroGetAngleZ() {
-	return mpu6050.getAngleZ();
+	// left is +
+	// right is -
+	return gyro.getGyroAngleZ();
+}
+
+
+void gyroStabilise() {
+	// if ( !rcPitchInput() ) {
+		gyroStabiliseX();
+	// }
+
+	// if ( !rcRollInput() ) {
+		gyroStabiliseY();
+	// }
+
+	// if ( !rcRotateInput() ) {
+	// 	gyroStabiliseZ();
+	// }
+
+}
+
+
+void gyroStabiliseX() {
+	float aX = gyroGetAngleX();
+
+	motorsX( gyroStabiliseFactor * aX );
+}
+
+void gyroStabiliseY() {
+	float aY = gyroGetAngleY();
+
+	motorsY( -gyroStabiliseFactor * aY );
+}
+
+void gyroStabiliseZ() {
+	float aZ = gyroGetAngleZ();
+
+	motorsZ( gyroStabiliseFactor * aZ );
+}
+
+void gyroUpdateStabiliseFactor() {
+	gyroStabiliseFactor = readChannel( 9, 0, 8, 1 );
 }
