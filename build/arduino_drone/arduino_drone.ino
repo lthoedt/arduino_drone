@@ -20,9 +20,12 @@ void setup() {
 }
 
 void loop() {
-	gyroUpdate();
-	motorsUpdate();
 
-	motorsTurn();
+	if ( !rcEmergencyStop() ) {
+		gyroUpdate();
+		motorsUpdate();
+
+		motorsTurn();
+	}
 
 }

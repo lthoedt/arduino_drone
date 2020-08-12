@@ -18,6 +18,15 @@ boolean rcRotateInput() {
 	return readChannel(3, 1000, 2000, 1000) > 1500 + rcInputDeadzone || readChannel(3, 1000, 2000, 1000) < 1500 - rcInputDeadzone;
 }
 
+boolean rcEmergencyStop() {
+	int emergencySwitch = readChannel( 4, 0, 1, 1 );
+	if ( emergencySwitch == 1 ) {
+		motorsStop();
+		motorsTurn();
+	}
+	return emergencySwitch;
+}
+
 // reads a channel of the reciever
 int readChannel(int channelInput, int minLimit, int maxLimit, int defaultValue){
 	uint16_t ch = IBus.readChannel(channelInput);

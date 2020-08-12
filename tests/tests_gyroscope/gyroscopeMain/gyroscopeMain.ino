@@ -53,7 +53,7 @@ void loop() {
     
 //   }
 
-    Serial.println( gyro.getGyroAngleZ() );
+    Serial.println( gyro.getGyroAngleY() );
 
 
 } 

@@ -13,15 +13,6 @@ void gyroUpdate() {
 	gyro.update();
 
 	gyroUpdateStabiliseFactor();
-
-	// Serial.print( "X: " );
-	// Serial.println( gyroGetAngleX() );
-
-	// Serial.print( "Y: " );
-	// Serial.println( gyroGetAngleY() );
-
-	// Serial.print( "Z: " );
-	// Serial.println( gyroGetAngleZ() );
 }
 
 float gyroGetAngleX() {
@@ -62,13 +53,17 @@ void gyroStabilise() {
 void gyroStabiliseX() {
 	float aX = gyroGetAngleX();
 
-	motorsX( gyroStabiliseFactor * aX );
+	if ( aX > gyroStabiliseThreshold || aX < -gyroStabiliseThreshold) {
+		motorsX( gyroStabiliseFactor * aX );
+	}
 }
 
 void gyroStabiliseY() {
 	float aY = gyroGetAngleY();
 
-	motorsY( -gyroStabiliseFactor * aY );
+	if ( aY > gyroStabiliseThreshold || aY < -gyroStabiliseThreshold) {
+		motorsY( -gyroStabiliseFactor * aY );
+	}
 }
 
 void gyroStabiliseZ() {
