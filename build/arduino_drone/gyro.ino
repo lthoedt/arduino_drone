@@ -1,12 +1,14 @@
 MPU6050 gyro(Wire);
 
-float gyroStabiliseThreshold = 1.0;
+float gyroStabiliseThreshold = 4.0;
 float gyroStabiliseFactor = 1.0;
 
 void gyroInit() {
 	Wire.begin();
 	gyro.begin();
 	gyro.calcGyroOffsets(true);
+
+
 }
 
 void gyroUpdate() {
@@ -62,7 +64,7 @@ void gyroStabiliseY() {
 	float aY = gyroGetAngleY();
 
 	if ( aY > gyroStabiliseThreshold || aY < -gyroStabiliseThreshold) {
-		motorsY( -gyroStabiliseFactor * aY );
+		motorsY( gyroStabiliseFactor * aY );
 	}
 }
 
