@@ -29,6 +29,32 @@ void motorsUpdate() {
 }
 
 void motorsTurn() {
+
+	if ( motor_TL_rpm < 1000 ) {
+		motor_TL_rpm = 1000;
+	} else if ( motor_TL_rpm > 2000 ) {
+		motor_TL_rpm = 2000;
+	}
+
+	if ( motor_TR_rpm < 1000 ) {
+		motor_TR_rpm = 1000;
+	} else if ( motor_TR_rpm > 2000 ) {
+		motor_TR_rpm = 2000;
+	}
+
+	if ( motor_BL_rpm < 1000 ) {
+		motor_BL_rpm = 1000;
+	} else if ( motor_BL_rpm > 2000 ) {
+		motor_BL_rpm = 2000;
+	}
+
+	if ( motor_BR_rpm < 1000 ) {
+		motor_BR_rpm = 1000;
+	} else if ( motor_BR_rpm > 2000 ) {
+		motor_BR_rpm = 2000;
+	}
+
+
 	motor_TL.writeMicroseconds( motor_TL_rpm );
 	motor_TR.writeMicroseconds( motor_TR_rpm );
 	motor_BL.writeMicroseconds( motor_BL_rpm );
