@@ -64,7 +64,7 @@ void gyroStabiliseY() {
 	float aY = gyroGetAngleY();
 
 	if ( aY > gyroStabiliseThreshold || aY < -gyroStabiliseThreshold) {
-		motorsY( gyroStabiliseFactor * aY );
+		motorsY( -gyroStabiliseFactor * aY );
 	}
 }
 
