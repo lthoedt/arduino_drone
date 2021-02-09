@@ -11,10 +11,10 @@ int motor_BR_rpm;
 int motor_manouvre_range;
 
 void motorsInit() {
-	motor_TL.attach(3);
-	motor_TR.attach(5);
-	motor_BL.attach(6);
-	motor_BR.attach(9);
+	motor_TL.attach(3, 1000, 2000);
+	motor_TR.attach(5, 1000, 2000);
+	motor_BL.attach(6, 1000, 2000);
+	motor_BR.attach(9, 1000, 2000);
 }
 
 void motorsUpdate() {
@@ -60,7 +60,7 @@ void motorsTurn() {
 	motor_BL.writeMicroseconds( motor_BL_rpm );
 	motor_BR.writeMicroseconds( motor_BR_rpm );
 
-	// motor_TL.writeMicroseconds( 1200 );
+	// motor_TL.writeMicroseconds( 1100 );
 }
 
 void motorsUpdateThrottle() {
@@ -104,7 +104,7 @@ void motorsZ( int speed ) {
 }
 
 void motorsUpdateManouvreRange() {
-	motor_manouvre_range = readChannel( 8, 10, 200, 40 );
+	motor_manouvre_range = readChannel( 4, 10, 200, 40 );
 }
 
 void motorsStop() {

@@ -2,15 +2,15 @@
 #include <Wire.h>
 #include <IBusBM.h>
 #include <Servo.h>
-
+ 
 void setup() {
 	Serial.begin(9600);
 
 	// ====== gyroscope ====== //
-	gyroInit();
+	// gyroInit();
 	// ====== ========= ====== //
 
-	// ====== gyroscope ====== //
+	// ====== reciever ====== //
 	rcInit();
 	// ====== ========= ====== //
 
@@ -22,7 +22,7 @@ void setup() {
 void loop() {
 
 	if ( !rcEmergencyStop() ) {
-		gyroUpdate();
+		// gyroUpdate();
 		motorsUpdate();
 
 		motorsTurn();

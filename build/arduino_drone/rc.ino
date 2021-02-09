@@ -19,7 +19,7 @@ boolean rcRotateInput() {
 }
 
 boolean rcEmergencyStop() {
-	int emergencySwitch = readChannel( 4, 0, 1, 1 );
+	int emergencySwitch = readChannel( 9, 0, 1, 1 );
 	if ( emergencySwitch == 1 ) {
 		motorsStop();
 		motorsTurn();

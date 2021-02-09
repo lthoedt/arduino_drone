@@ -75,5 +75,5 @@ void gyroStabiliseZ() {
 }
 
 void gyroUpdateStabiliseFactor() {
-	gyroStabiliseFactor = readChannel( 9, 0, 8, 1 );
+	gyroStabiliseFactor = readChannel( 5, 0, 8, 1 );
 }
